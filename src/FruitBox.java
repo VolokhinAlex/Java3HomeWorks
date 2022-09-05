@@ -35,11 +35,8 @@ public class FruitBox<T extends Fruit> {
         return box.size();
     }
 
-    public boolean compare(FruitBox box) {
-        if (this.getSize() != box.getSize()) return false;
-        if (this == box) return true;
-        if (box == null) return false;
-        return this.getWeight() == box.getWeight();
+    public boolean compare(FruitBox<?> box) {
+        return Math.abs(this.getWeight() - box.getWeight()) < 0.0001;
     }
 
     public void putInAnotherBox(FruitBox<T> newBox) {

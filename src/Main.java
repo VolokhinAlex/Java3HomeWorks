@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         String[] words = {"apple", "orange", "Today", "Monday", "car", "bicycle"};
         System.out.println("Массив до изменений: " + Arrays.toString(words));
-        changePositionOfElements(0, 3, words);
+        changePositionOfElements(1, 5, words);
         System.out.println("Массив после изменений: " + Arrays.toString(words));
         System.out.println("Массив words преобразован в ArrayList, со значениями:\n" + convertArrayToArrayList(words));
 
@@ -16,13 +16,12 @@ public class Main {
         FruitBox<Orange> oranges = new FruitBox<>();
         oranges.add(new Orange());
 
-        FruitBox<Apple> apl = new FruitBox<>();
-        apl.add(new Apple());
+        FruitBox<Apple> apple = new FruitBox<>();
+        apple.add(new Apple());
 
-        System.out.println("Равны ли коробки? - " + apples.compare(apl));
+        System.out.println("Равны ли коробки? - " + apples.compare(apple));
         System.out.println("Равны ли коробки? - " + apples.compare(oranges));
 
-        FruitBox<Apple> apple = new FruitBox<>();
         apples.putInAnotherBox(apple);
     }
 
@@ -36,7 +35,6 @@ public class Main {
     private static <T> ArrayList<T> convertArrayToArrayList(T... array) {
         return new ArrayList<>(Arrays.asList(array));
     }
-
 
 
 }
