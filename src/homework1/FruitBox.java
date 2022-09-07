@@ -1,3 +1,5 @@
+package homework1;
+
 import java.util.ArrayList;
 
 public class FruitBox<T extends Fruit> {
@@ -12,10 +14,7 @@ public class FruitBox<T extends Fruit> {
     }
 
     public void add(T fruit) {
-        if (boxVolume + 1 > maxBoxVolume) {
-            System.out.println("The box is already full");
-            return;
-        }
+        if (isFullFruitBox()) return;
         box.add(fruit);
         boxVolume += fruit.weight;
     }
@@ -40,7 +39,20 @@ public class FruitBox<T extends Fruit> {
     }
 
     public void putInAnotherBox(FruitBox<T> newBox) {
-        newBox.box.addAll(box);
-        box.clear();
+        boxVolume = newBox.weight;
+        for (int i = 0; i < box.size(); i++) {
+            if (isFullFruitBox()) return;
+            newBox.box.add(box.get(i));
+            box.remove(i);
+        }
+    }
+
+    private boolean isFullFruitBox() {
+        if (boxVolume + 1 > maxBoxVolume) {
+            System.out.println("The box is already full");
+            return true;
+        } else {
+            return false;
+        }
     }
 }
