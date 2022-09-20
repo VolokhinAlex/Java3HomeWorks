@@ -2,6 +2,8 @@ package homework5;
 
 import java.util.concurrent.Phaser;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class MainClass {
     public static final int CARS_COUNT = 4;
@@ -9,9 +11,7 @@ public class MainClass {
     private static Semaphore maxCountCarsInTunnel = new Semaphore(2);
     private static final int START_PHASE = 0;
     private static final int END_PHASE = 1;
-
-    public MainClass() {
-    }
+    public static Lock winLock = new ReentrantLock();
 
     public static void main(String[] args) {
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");

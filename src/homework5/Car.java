@@ -1,16 +1,12 @@
 package homework5;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
 public class Car implements Runnable {
 
     private static int CARS_COUNT;
     private Race race;
     private int speed;
     private String name;
-    public static boolean isWin;
-    private Lock winLock = new ReentrantLock();
+    private static boolean isWin;
 
     public String getName() {
         return name;
@@ -43,15 +39,14 @@ public class Car implements Runnable {
             race.getStages().get(i).go(this);
         }
 
-        winLock.lock();
+        MainClass.winLock.lock();
         if (!isWin) {
             System.out.printf("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> %s победил в гонке!!!\n", name);
             isWin = true;
-            winLock.unlock();
         } else {
             System.out.printf("%s закончил гонку!\n", name);
         }
-
+        MainClass.winLock.unlock();
         MainClass.phaser.arriveAndDeregister();
     }
 
