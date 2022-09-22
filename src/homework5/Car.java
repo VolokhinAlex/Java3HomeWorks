@@ -1,5 +1,7 @@
 package homework5;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Car implements Runnable {
 
     private static int CARS_COUNT;
@@ -7,6 +9,7 @@ public class Car implements Runnable {
     private int speed;
     private String name;
     private static boolean isWin;
+    private static final AtomicInteger position = new AtomicInteger();
 
     public String getName() {
         return name;
@@ -42,9 +45,10 @@ public class Car implements Runnable {
         MainClass.winLock.lock();
         if (!isWin) {
             System.out.printf("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> %s победил в гонке!!!\n", name);
+            position.incrementAndGet();
             isWin = true;
         } else {
-            System.out.printf("%s закончил гонку!\n", name);
+            System.out.printf("%s закончил гонку и занял %d место!\n", name, position.incrementAndGet());
         }
         MainClass.winLock.unlock();
         MainClass.phaser.arriveAndDeregister();
