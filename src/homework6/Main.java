@@ -2,6 +2,7 @@ package homework6;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Main {
 
@@ -19,14 +20,9 @@ public class Main {
     }
 
     public static boolean isArrayConsistsCertainNumbers(Integer[] numbers) {
-        boolean isNumberOne = false;
-        boolean isNumberFour = false;
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] != 1 && numbers[i] != 4) return false;
-            if (numbers[i] == 1) isNumberOne = true;
-            if (numbers[i] == 4) isNumberFour = true;
-        }
-        return isNumberOne && isNumberFour;
+        ArrayList<Integer> certainNumbersArray = new ArrayList<>(Arrays.asList(numbers));
+        if (!certainNumbersArray.removeAll(Collections.singleton(4)) || certainNumbersArray.size() == 0) return false;
+        return certainNumbersArray.removeAll(Collections.singleton(1)) && certainNumbersArray.size() == 0;
     }
 
 }
