@@ -7,9 +7,6 @@ import java.util.Collections;
 public class Main {
 
     public static void main(String[] args) {
-        Integer[] arr = {1, 2, 4, 4, 2, 3, 4, 1, 7};
-        Integer[] newArray = createNewArrayBasedOld(arr);
-        System.out.println(isArrayConsistsCertainNumbers(new Integer[]{4, 4, 4, 4}));
     }
 
     public static Integer[] createNewArrayBasedOld(Integer[] array) {

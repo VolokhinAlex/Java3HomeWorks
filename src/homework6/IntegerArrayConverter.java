@@ -4,6 +4,7 @@ import org.junit.jupiter.api.extension.ParameterContext;
 import org.junit.jupiter.params.converter.ArgumentConversionException;
 import org.junit.jupiter.params.converter.ArgumentConverter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class IntegerArrayConverter implements ArgumentConverter {
@@ -12,18 +13,18 @@ public class IntegerArrayConverter implements ArgumentConverter {
     public Object convert(Object source, ParameterContext context) throws ArgumentConversionException {
         if (!(source instanceof String)) {
             throw new IllegalArgumentException(
-                    "The argument should be a string: " + source);
+                    "The parameter should be a string: " + source);
         }
         try {
-            int[] numbers = Arrays.stream(((String) source).split(",")).mapToInt(Integer::parseInt).toArray();
-            Integer[] result = new Integer[numbers.length];
-            for (int i = 0; i < numbers.length; i++) {
-                result[i] = numbers[i];
+            ArrayList<String> numbers = new ArrayList<>(Arrays.asList(((String) source).split(",")));
+            Integer[] stringToIntegerArray = new Integer[numbers.size()];
+            for (int i = 0; i < numbers.size(); i++) {
+                stringToIntegerArray[i] = Integer.valueOf(numbers.get(i));
             }
-            return result;
+            return stringToIntegerArray;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new IllegalArgumentException("Failed to convert", e);
+            throw new IllegalArgumentException("Error to convert", e);
         }
     }
 }

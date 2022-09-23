@@ -6,12 +6,6 @@ import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.CsvSource;
 
 public class MainTest {
-    private Main mainClass;
-
-    @BeforeEach
-    public void init() {
-        mainClass = new Main();
-    }
 
     @CsvSource(value = {
             "1,2,4,4,2,3,4,1,7;1,7",
@@ -21,8 +15,8 @@ public class MainTest {
     }, delimiterString = ";")
     @ParameterizedTest
     public void createNewArrayBasedOldTest(@ConvertWith(IntegerArrayConverter.class) Integer[] oldArray,
-                                       @ConvertWith(IntegerArrayConverter.class) Integer[] newArray) {
-        Assertions.assertArrayEquals(newArray, mainClass.createNewArrayBasedOld(oldArray));
+                                           @ConvertWith(IntegerArrayConverter.class) Integer[] newArray) {
+        Assertions.assertArrayEquals(newArray, Main.createNewArrayBasedOld(oldArray));
     }
 
     @CsvSource(value = {
@@ -33,10 +27,9 @@ public class MainTest {
     }, delimiterString = ";")
     @ParameterizedTest
     public void isArrayConsistsCertainNumbersTest(@ConvertWith(IntegerArrayConverter.class) Integer[] numbers,
-                                             boolean isBoolean) {
-        Assertions.assertEquals(isBoolean, mainClass.isArrayConsistsCertainNumbers(numbers));
+                                                  boolean isBoolean) {
+        Assertions.assertEquals(isBoolean, Main.isArrayConsistsCertainNumbers(numbers));
     }
-
 
 
 }
