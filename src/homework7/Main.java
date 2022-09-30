@@ -40,14 +40,29 @@ public class Main {
         System.out.println("Method with priority 5");
     }
 
-    @Test(priority = 7)
+    @Test(priority = 6)
     public static void methodTest6() {
+        System.out.println("Method with priority 6");
+    }
+
+    @Test(priority = 7)
+    public static void methodTest7() {
         System.out.println("Method with priority 7");
     }
 
     @Test(priority = 8)
-    public static void methodTest7() {
-        System.out.println("Method with priority 7");
+    public static void methodTest8() {
+        System.out.println("Method with priority 8");
+    }
+
+    @Test(priority = 9)
+    public static void methodTest9() {
+        System.out.println("Method with priority 9");
+    }
+
+    @Test(priority = 10)
+    public static void methodTest10() {
+        System.out.println("Method with priority 10");
     }
 
 }

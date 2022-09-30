@@ -11,6 +11,10 @@ import java.util.Comparator;
 
 public class StartTests {
 
+    private static final int MIN_PRIORITY = 1;
+    private static final int MAX_PRIORITY = 10;
+
+
     public static void start(Class<?> classForTest) {
         isMoreOneWithBeforeSuiteOrAfterSuite(classForTest);
         ArrayList<Method> listMethodsWithAnnotationTest = new ArrayList<>();
@@ -22,7 +26,7 @@ public class StartTests {
                 beforeSuiteAnnotation = method;
             } else if (method.isAnnotationPresent(Test.class)) {
                 listMethodsWithAnnotationTest.add(method);
-                checkMaxAndMinPriorities(listMethodsWithAnnotationTest, 1, 10);
+                checkMaxAndMinPriorities(listMethodsWithAnnotationTest, MIN_PRIORITY, MAX_PRIORITY);
             } else if (method.isAnnotationPresent(AfterSuite.class)) {
                 afterSuiteAnnotation = method;
             }
@@ -71,7 +75,7 @@ public class StartTests {
         for (Method method : methods) {
             Test annotation = method.getAnnotation(Test.class);
             if (annotation.priority() < minPriority || annotation.priority() > maxPriority) {
-                throw new RuntimeException("Exceeding the limits of acceptable priority values");
+                throw new RuntimeException("Exceeding the limits of acceptable priority values. Method: " + method.getName());
             }
         }
     }
