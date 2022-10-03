@@ -16,9 +16,9 @@ public class StartTests {
 
 
     public static void start(Class<?> classForTest) {
-        isMoreOneWithBeforeSuiteOrAfterSuite(classForTest);
         ArrayList<Method> listMethodsWithAnnotationTest = new ArrayList<>();
-        Method[] methods = classForTest.getMethods();
+        Method[] methods = classForTest.getDeclaredMethods();
+        isMoreOneWithBeforeSuiteOrAfterSuite(methods);
         Method beforeSuiteAnnotation = null, afterSuiteAnnotation = null;
 
         for (Method method : methods) {
@@ -45,10 +45,9 @@ public class StartTests {
         }
     }
 
-    public static void isMoreOneWithBeforeSuiteOrAfterSuite(Class<?> classForTest) {
+    public static void isMoreOneWithBeforeSuiteOrAfterSuite(Method[] methods) {
         int countBeforeAnnotation = 0;
         int countAfterAnnotation = 0;
-        Method[] methods = classForTest.getMethods();
         for (Method method : methods) {
             if (method.isAnnotationPresent(BeforeSuite.class)) {
                 countBeforeAnnotation++;
